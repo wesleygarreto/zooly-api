@@ -1,5 +1,6 @@
 package br.com.truvainfo.zoolyapi.domain;
 
+import br.com.truvainfo.zoolyapi.enums.UserProfile;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,34 +14,31 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "ZOOLY", name = "ANIMAL")
-public class Animal implements Serializable {
+@Table(schema = "ZOOLY", name = "USER")
+public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "CD_ANIMAL")
+	@Column(name = "CD_USER")
 	private Integer code;
 	
-	@Column(name = "POPULAR_NAME")
-	private String popularName;
+	@Column(name = "NAME")
+	private String name;
 	
-	@Column(name = "NICKNAME")
-	private String nickname;
-	
-	@Column(name = "SCIENTIFIC_NAME")
-	private String scientificName;
+	@Column(name = "EMAIL")
+	private String email;
 	
 	@Column(name = "NOTE")
 	private String note;
+	
+	@Column(name = "PROFILE")
+	private UserProfile profile;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATION_DATE")
 	private Date creationDate;
 	
-	@OneToMany(mappedBy = "animal")
+	@OneToMany(mappedBy = "responsibleUser")
 	private List<Task> tasks;
-	
-	@OneToMany(mappedBy = "animal")
-	private List<Biometry> biometrics;
 	
 }
