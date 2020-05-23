@@ -33,7 +33,7 @@ public class User implements Serializable {
 	@Column(name = "NOTE")
 	private String note;
 
-	@OneToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CD_ROLE")
 	private UserRole role;
 

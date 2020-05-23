@@ -26,4 +26,5 @@ public class UserRole {
 	private int id;
 	@Column(name = "DESC_ROLE")
 	private String desc;
+
 }
