@@ -1,6 +1,5 @@
 package br.com.truvainfo.zoolyapi.domain;
 
-import br.com.truvainfo.zoolyapi.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;

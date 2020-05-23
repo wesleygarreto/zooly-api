@@ -1,4 +1,4 @@
-package br.com.truvainfo.zoolyapi.enums;
+package br.com.truvainfo.zoolyapi.domain;
 
 import lombok.*;
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "ZOOLY", name = "ROLE")
+@Table(schema = "ZOOLY", name = "USER_ROLE")
 public class UserRole {
 	
 	public static final String ADMIN = "ADMIN";
