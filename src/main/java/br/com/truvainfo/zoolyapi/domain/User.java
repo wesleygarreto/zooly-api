@@ -1,6 +1,6 @@
 package br.com.truvainfo.zoolyapi.domain;
 
-import br.com.truvainfo.zoolyapi.enums.UserProfile;
+import br.com.truvainfo.zoolyapi.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,12 +27,19 @@ public class User implements Serializable {
 	
 	@Column(name = "EMAIL")
 	private String email;
+
+	@Column(name = "PASSWORD")
+	private String password;
 	
 	@Column(name = "NOTE")
 	private String note;
-	
-	@Column(name = "PROFILE")
-	private UserProfile profile;
+
+	@OneToOne
+	@JoinColumn(name = "CD_ROLE")
+	private UserRole role;
+
+	@Column(name = "ACTIVE")
+	private boolean active;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATION_DATE")
