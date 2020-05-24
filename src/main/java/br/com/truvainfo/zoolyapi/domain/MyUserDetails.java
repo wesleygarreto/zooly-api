@@ -27,31 +27,31 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return this.active ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return this.active ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return this.active ? Boolean.TRUE : Boolean.FALSE;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.active ? Boolean.TRUE : Boolean.FALSE;
     }
 }

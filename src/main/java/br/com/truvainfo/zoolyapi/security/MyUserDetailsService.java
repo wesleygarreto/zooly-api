@@ -27,7 +27,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
         user.orElseThrow(() -> new UsernameNotFoundException(getMessage(MSG_ERROR_AUTHENTICATION_01)));
 
-        return user.map(MyUserDetails::new).get();
+        return new MyUserDetails(user.get());
     }
 
 }

@@ -30,7 +30,7 @@ public class User implements Serializable {
 	@Column(name = "PASSWORD")
 	private String password;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "CD_ROLE")
 	private UserRole role;
 
