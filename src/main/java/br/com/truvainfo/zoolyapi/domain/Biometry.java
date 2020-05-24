@@ -18,11 +18,15 @@ public class Biometry implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CD_BIOMETRY")
-	private Integer code;
+	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CD_ANIMAL")
 	private Animal animal;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CD_USER")
+	private User user;
 	
 	@Column(name = "WEIGHT")
 	private String weight;
