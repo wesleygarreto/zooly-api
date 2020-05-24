@@ -46,10 +46,10 @@ public class TaskResource {
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
-	@DeleteMapping("/{code}")
-	public ResponseEntity<TaskDto> deleteTask(@PathVariable final Integer taskCode) {
+	@DeleteMapping("/{taskId}")
+	public ResponseEntity<TaskDto> deleteTask(@PathVariable final Integer taskId) {
 		
-		taskService.deleteTask(taskCode);
+		taskService.deleteTask(taskId);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 }
