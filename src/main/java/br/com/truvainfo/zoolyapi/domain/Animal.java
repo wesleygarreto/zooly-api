@@ -19,7 +19,7 @@ public class Animal implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CD_ANIMAL")
-	private Integer code;
+	private Integer id;
 	
 	@Column(name = "POPULAR_NAME")
 	private String popularName;

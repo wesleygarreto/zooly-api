@@ -1,9 +1,7 @@
 package br.com.truvainfo.zoolyapi.domain;
 
-import br.com.truvainfo.zoolyapi.enums.TaskStatus;
-import br.com.truvainfo.zoolyapi.repository.AnimalRepository;
+import br.com.truvainfo.zoolyapi.domain.enums.TaskStatus;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +19,7 @@ public class Task implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CD_TASK")
-	private Integer code;
+	private Integer id;
 	
 	@Column(name = "TITLE")
 	private String title;

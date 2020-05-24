@@ -1,16 +1,16 @@
-package br.com.truvainfo.zoolyapi.enums;
+package br.com.truvainfo.zoolyapi.domain.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.stream.Stream;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public enum TaskStatus {
 	
-	COMPLETED(1),
-	UNCOMPLETED(2);
+	UNCOMPLETED(1),
+	COMPLETED(2);
 	
 	private final Integer value;
 	
