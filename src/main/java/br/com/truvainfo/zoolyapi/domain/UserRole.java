@@ -23,8 +23,8 @@ public class UserRole {
 
 	@Id
 	@Column(name = "CD_ROLE")
-	private int id;
-	@Column(name = "DESC_ROLE")
-	private String desc;
+	private Integer id;
+	@Column(name = "DESC_ROLE", unique = true)
+	private String description;
 
 }

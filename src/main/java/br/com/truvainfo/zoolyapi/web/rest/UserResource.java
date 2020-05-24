@@ -36,10 +36,10 @@ public class UserResource {
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
-	@DeleteMapping("/{code}")
-	public ResponseEntity<UserDto> deleteUser(@PathVariable final Integer userCode) {
+	@DeleteMapping("/{userId}")
+	public ResponseEntity<UserDto> deleteUser(@PathVariable final Integer userId) {
 		
-		userService.deleteUser(userCode);
+		userService.deleteUser(userId);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 }
