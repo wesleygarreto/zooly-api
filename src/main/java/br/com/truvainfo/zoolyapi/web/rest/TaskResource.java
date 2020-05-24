@@ -22,14 +22,14 @@ public class TaskResource {
 		return ResponseEntity.ok(taskService.findAllTasks());
 	}
 	
-	@GetMapping(value = "/user/{code}", produces = "application/json")
-	public ResponseEntity<List<TaskDto>> findUserTasks(@PathVariable final Integer userCode) {
-		return ResponseEntity.ok(taskService.findUserTasks(userCode));
+	@GetMapping(value = "/user/{userId}", produces = "application/json")
+	public ResponseEntity<List<TaskDto>> findUserTasks(@PathVariable final Integer userId) {
+		return ResponseEntity.ok(taskService.findUserTasks(userId));
 	}
 	
-	@GetMapping(value = "/animal/{code}", produces = "application/json")
-	public ResponseEntity<List<TaskDto>> findAnimalTasks(@PathVariable final Integer animalCode) {
-		return ResponseEntity.ok(taskService.findAnimalTasks(animalCode));
+	@GetMapping(value = "/animal/{animalId}", produces = "application/json")
+	public ResponseEntity<List<TaskDto>> findAnimalTasks(@PathVariable final Integer animalId) {
+		return ResponseEntity.ok(taskService.findAnimalTasks(animalId));
 	}
 	
 	@PostMapping(consumes = "application/json")

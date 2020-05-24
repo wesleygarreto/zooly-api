@@ -54,9 +54,9 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	public void deleteUser(final Integer useriD) {
-		userRepository.delete(userRepository.findById(useriD)
+	public void deleteUser(final Integer userId) {
+		userRepository.delete(userRepository.findById(userId)
 		                                    .orElseThrow(
-				                                    () -> new IllegalArgumentException(MSG_ERROR_USER_ID + useriD)));
+				                                    () -> new IllegalArgumentException(MSG_ERROR_USER_ID + userId)));
 	}
 }

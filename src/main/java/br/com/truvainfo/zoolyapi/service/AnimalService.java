@@ -16,6 +16,8 @@ import static java.util.Objects.*;
 @RequiredArgsConstructor
 public class AnimalService {
 	
+	public static final String MSG_ERROR_ANIMAL_ID = "msg.error.animal.id";
+	
 	private final AnimalRepository animalRepository;
 	private final AnimalMapper animalMapper;
 	
@@ -34,10 +36,10 @@ public class AnimalService {
 		animalRepository.save(animal);
 	}
 	
-	public void deleteAnimal(final Integer animalCode) {
-		animalRepository.delete(animalRepository.findById(animalCode)
+	public void deleteAnimal(final Integer animalId) {
+		animalRepository.delete(animalRepository.findById(animalId)
 		                                        .orElseThrow(() -> new IllegalArgumentException(
-				                                        "The Animal of id " + animalCode + " not exists")));
+				                                        MSG_ERROR_ANIMAL_ID + animalId)));
 	}
 	
 }

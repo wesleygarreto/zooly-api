@@ -15,6 +15,8 @@ import static java.util.Objects.*;
 @RequiredArgsConstructor
 public class TaskService {
 	
+	public static final String MSG_ERROR_TASK_ID = "msg.error.task.id";
+	
 	private final TaskRepository taskRepository;
 	private final TaskMapper taskMapper;
 	
@@ -22,12 +24,12 @@ public class TaskService {
 		return taskMapper.toDtoList(taskRepository.findAll());
 	}
 	
-	public List<TaskDto> findUserTasks(final Integer userCode) {
-		return taskMapper.toDtoList(taskRepository.findAllByResponsibleUserId(userCode));
+	public List<TaskDto> findUserTasks(final Integer userId) {
+		return taskMapper.toDtoList(taskRepository.findAllByResponsibleUserId(userId));
 	}
 	
-	public List<TaskDto> findAnimalTasks(final Integer animalCode) {
-		return taskMapper.toDtoList(taskRepository.findAllByResponsibleUserId(animalCode));
+	public List<TaskDto> findAnimalTasks(final Integer animalId) {
+		return taskMapper.toDtoList(taskRepository.findAllByAnimalId(animalId));
 	}
 	
 	public void saveTask(final TaskDto taskDto) {
@@ -39,10 +41,10 @@ public class TaskService {
 		taskRepository.save(taskMapper.toEntity(taskDto));
 	}
 	
-	public void deleteTask(final Integer taskCode) {
-		taskRepository.delete(taskRepository.findById(taskCode)
-		                                    .orElseThrow(() -> new IllegalArgumentException(
-				                                    "The Task of id " + taskCode + " not exists")));
+	public void deleteTask(final Integer taskId) {
+		taskRepository.delete(taskRepository.findById(taskId)
+		                                    .orElseThrow(
+				                                    () -> new IllegalArgumentException(MSG_ERROR_TASK_ID + taskId)));
 	}
 	
 }
