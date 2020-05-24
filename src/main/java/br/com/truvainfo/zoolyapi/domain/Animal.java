@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
 @Builder
@@ -15,22 +15,32 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(schema = "ZOOLY", name = "ANIMAL")
 public class Animal implements Serializable {
-
-    @Id
-    @Column(name = "COD_ANIMAL")
-    private Integer codigo;
-
-    @Column(name = "NOME_POPULAR")
-    private String nomePopular;
-
-    @Column(name = "NOME_CIENTIFICO")
-    private String nomeCientifico;
-
-    @Column(name = "OBSERVACAO")
-    private String observacao;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "DTHR_ENTRADA")
-    private Date dataDeEntrada;
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "CD_ANIMAL")
+	private Integer id;
+	
+	@Column(name = "POPULAR_NAME")
+	private String popularName;
+	
+	@Column(name = "NICKNAME")
+	private String nickname;
+	
+	@Column(name = "SCIENTIFIC_NAME")
+	private String scientificName;
+	
+	@Column(name = "NOTE")
+	private String note;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATION_DATE")
+	private Date creationDate;
+	
+	@OneToMany(mappedBy = "animal")
+	private List<Task> tasks;
+	
+	@OneToMany(mappedBy = "animal")
+	private List<Biometry> biometrics;
+	
 }

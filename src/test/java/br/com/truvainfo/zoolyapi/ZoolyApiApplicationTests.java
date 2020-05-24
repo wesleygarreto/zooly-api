@@ -1,13 +1,13 @@
 package br.com.truvainfo.zoolyapi;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ZoolyApiApplicationTests {
+public class ZoolyApiApplicationTests {
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 	}
 
 }
