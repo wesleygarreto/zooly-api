@@ -29,9 +29,6 @@ public class User implements Serializable {
 
 	@Column(name = "PASSWORD")
 	private String password;
-	
-	@Column(name = "NOTE")
-	private String note;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CD_ROLE")
