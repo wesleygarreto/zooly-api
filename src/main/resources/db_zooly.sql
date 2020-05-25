@@ -15,6 +15,7 @@ insert into zooly.user (cd_user, name, email, password, cd_role, active, creatio
 insert into zooly.user (cd_user, name, email, password, cd_role, active, creation_date) values (4, 'Operator', 'operator@zooly.com', '123', 4, true, CURRENT_TIMESTAMP);
 insert into zooly.user (cd_user, name, email, password, cd_role, active, creation_date) values (2, 'Manager', 'manager@zooly.com', '123', 2, true, CURRENT_TIMESTAMP);
 insert into zooly.user (cd_user, name, email, password, cd_role, active, creation_date) values (3, 'Doctor', 'doctor@zooly.com', '123', 3, true, CURRENT_TIMESTAMP);
+insert into zooly.user (cd_user, name, email, password, cd_role, active, creation_date) values (5, 'xx', 'xx', 'xx', 3, true, CURRENT_TIMESTAMP);
 
 select * from zooly.user;
 delete from zooly.user;
