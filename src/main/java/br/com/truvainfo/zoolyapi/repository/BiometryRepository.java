@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface BiometryRepository extends JpaRepository<Biometry, Integer> {
 	
-	List<Biometry> findBiometricsByAnimalId(final Integer animalCode);
+	List<Biometry> findBiometricsByAnimalId(final Integer animalId);
 }

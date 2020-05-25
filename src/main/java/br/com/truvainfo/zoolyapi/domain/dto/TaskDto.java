@@ -23,6 +23,7 @@ public class TaskDto implements Serializable {
 	@JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date date;
 	
+	@JsonFormat(shape = STRING)
 	private TaskStatus taskStatus;
 	
 	private Integer animalId;

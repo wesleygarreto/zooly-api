@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 	
-	List<Task> findAllByAnimalId(final Integer animalCode);
+	List<Task> findAllByAnimalId(final Integer animalId);
 	
-	List<Task> findAllByResponsibleUserId(final Integer userCode);
+	List<Task> findAllByResponsibleUserId(final Integer userId);
 }

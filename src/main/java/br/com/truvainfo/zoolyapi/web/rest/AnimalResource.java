@@ -36,10 +36,10 @@ public class AnimalResource {
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
-	@DeleteMapping("/{code}")
-	public ResponseEntity<AnimalDto> deleteAnimal(@PathVariable final Integer animalCode) {
+	@DeleteMapping("/{animalId}")
+	public ResponseEntity<AnimalDto> deleteAnimal(@PathVariable final Integer animalId) {
 		
-		animalService.deleteAnimal(animalCode);
+		animalService.deleteAnimal(animalId);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 }

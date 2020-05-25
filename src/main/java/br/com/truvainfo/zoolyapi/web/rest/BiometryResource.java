@@ -17,9 +17,9 @@ public class BiometryResource {
 	
 	private final BiometryService biometryService;
 	
-	@GetMapping(produces = "application/json")
-	public ResponseEntity<List<BiometryDto>> findAnimalBiometrics(@PathVariable final Integer animalCode) {
-		return ResponseEntity.ok(biometryService.findAnimalBiometrics(animalCode));
+	@GetMapping(value = "/{animalId}", produces = "application/json")
+	public ResponseEntity<List<BiometryDto>> findAnimalBiometrics(@PathVariable final Integer animalId) {
+		return ResponseEntity.ok(biometryService.findAnimalBiometrics(animalId));
 	}
 	
 	@PostMapping(consumes = "application/json")
@@ -36,10 +36,10 @@ public class BiometryResource {
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
-	@DeleteMapping("/{code}")
-	public ResponseEntity<BiometryDto> deleteBiometry(@PathVariable final Integer biometryCode) {
+	@DeleteMapping("/{biometryId}")
+	public ResponseEntity<BiometryDto> deleteBiometry(@PathVariable final Integer biometryId) {
 		
-		biometryService.deleteBiometry(biometryCode);
+		biometryService.deleteBiometry(biometryId);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 }
