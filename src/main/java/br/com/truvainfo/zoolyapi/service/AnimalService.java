@@ -21,6 +21,11 @@ public class AnimalService {
 	private final AnimalRepository animalRepository;
 	private final AnimalMapper animalMapper;
 	
+	public Animal findById(final Integer animalId) {
+		return animalRepository.findById(animalId).orElseThrow(
+				() -> new IllegalArgumentException(MSG_ERROR_ANIMAL_ID + animalId));
+	}
+	
 	public List<AnimalDto> findAnimals() {
 		return animalMapper.toDtoList(animalRepository.findAll());
 	}
