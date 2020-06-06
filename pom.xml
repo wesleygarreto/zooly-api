@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.truvainfo</groupId>
 	<artifactId>zooly-api</artifactId>
-	<version>1.0.6</version>
+	<version>1.0.7</version>
 	<name>zooly-api</name>
 	<description>API for zooly project</description>
 
@@ -117,6 +117,18 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>5.0.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.12.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.0.0</version>
 		</dependency>
 
 	</dependencies>

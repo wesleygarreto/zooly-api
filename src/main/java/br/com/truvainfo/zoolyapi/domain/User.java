@@ -30,6 +30,9 @@ public class User implements Serializable {
 	@Column(name = "PASSWORD")
 	private String password;
 
+	@Column(name = "HASH_USER")
+	private String hash;
+
 	@ManyToOne()
 	@JoinColumn(name = "CD_ROLE")
 	private UserRole role;
