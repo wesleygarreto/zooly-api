@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.truvainfo</groupId>
 	<artifactId>zooly-api</artifactId>
-	<version>1.0.7</version>
+	<version>1.0.8</version>
 	<name>zooly-api</name>
 	<description>API for zooly project</description>
 
@@ -122,13 +122,13 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.12.2</version>
+			<version>6.5.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports-fonts</artifactId>
-			<version>6.0.0</version>
+			<version>6.12.2</version>
 		</dependency>
 
 	</dependencies>

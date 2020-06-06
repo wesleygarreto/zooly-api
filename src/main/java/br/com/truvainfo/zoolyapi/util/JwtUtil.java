@@ -1,5 +1,6 @@
 package br.com.truvainfo.zoolyapi.util;
 
+import br.com.truvainfo.zoolyapi.domain.MyUserDetails;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +23,7 @@ public class JwtUtil {
 
     public static final Date DEZ_HORAS = new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10);
     public static final String AUTHORITIES_KEY = "roles";
+    public static final String USER_INFOS = "userInfos";
 
 
     public String extractUsername(String token) {
@@ -44,12 +46,13 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(MyUserDetails userDetails) {
         final String authorities = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
         Map<String, Object> claims = new HashMap<>();
         claims.put(AUTHORITIES_KEY, authorities);
+        claims.put(USER_INFOS, userDetails.getUser());
         return createToken(claims, userDetails.getUsername());
     }
 

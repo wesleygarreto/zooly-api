@@ -12,12 +12,14 @@ public class MyUserDetails implements UserDetails {
 	private String email;
 	private String password;
 	private boolean active;
+	private User user;
 	private GrantedAuthority role;
 	
 	public MyUserDetails(User user) {
 		this.email = user.getEmail();
 		this.password = user.getPassword();
 		this.active = user.isActive();
+		this.user = new User(user.getId(), user.getName(), user.getEmail(), user.getRole(), user.isActive(), user.getCreationDate());
 		this.role = new SimpleGrantedAuthority(user.getRole().getDescription());
 	}
 	
@@ -54,5 +56,9 @@ public class MyUserDetails implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return active ? Boolean.TRUE : Boolean.FALSE;
+	}
+
+	public User getUser() {
+		return user;
 	}
 }
