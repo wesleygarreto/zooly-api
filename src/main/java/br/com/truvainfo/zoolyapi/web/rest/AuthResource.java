@@ -1,5 +1,6 @@
 package br.com.truvainfo.zoolyapi.web.rest;
 
+import br.com.truvainfo.zoolyapi.domain.MyUserDetails;
 import br.com.truvainfo.zoolyapi.domain.dto.AuthenticationRequestDTO;
 import br.com.truvainfo.zoolyapi.domain.dto.AuthenticationResponseDTO;
 import br.com.truvainfo.zoolyapi.security.MyUserDetailsService;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +40,7 @@ public class AuthResource {
 			throw new BadCredentialsException(getMessage("msg.error.authentication.01"));
 		}
 
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequestDTO.getEmail());
+		final MyUserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequestDTO.getEmail());
 
 		final String jwt = jwtUtil.generateToken(userDetails);
 
