@@ -8,15 +8,16 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import static com.fasterxml.jackson.annotation.JsonFormat.Shape.*;
+import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 
 @Getter
 @Setter
-public class UserDTO implements Serializable {
+public class UserWithPasswdDTO implements Serializable {
 	
 	private Integer id;
 	private String name;
 	private String email;
+	private String password;
 	private UserRoleDTO userRole;
 	
 	@JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm")
