@@ -3,7 +3,9 @@ package br.com.truvainfo.zoolyapi.web.rest;
 import br.com.truvainfo.zoolyapi.domain.MyUserDetails;
 import br.com.truvainfo.zoolyapi.domain.dto.AuthenticationRequestDTO;
 import br.com.truvainfo.zoolyapi.domain.dto.AuthenticationResponseDTO;
+import br.com.truvainfo.zoolyapi.domain.dto.UserChangeDTO;
 import br.com.truvainfo.zoolyapi.security.MyUserDetailsService;
+import br.com.truvainfo.zoolyapi.service.UserService;
 import br.com.truvainfo.zoolyapi.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class AuthResource {
 	private MyUserDetailsService userDetailsService;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private JwtUtil jwtUtil;
 	
 	@PostMapping(produces = "application/json")
@@ -45,6 +50,11 @@ public class AuthResource {
 		final String jwt = jwtUtil.generateToken(userDetails);
 
 		return ResponseEntity.ok(new AuthenticationResponseDTO(jwt));
+	}
+
+	@PostMapping("/change/pwd")
+	public ResponseEntity<Boolean> verifyHashAndUser(@RequestBody UserChangeDTO userChangeDTO) throws Exception {
+		return ResponseEntity.ok(userService.changePassword(userChangeDTO));
 	}
 
 }

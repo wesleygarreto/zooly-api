@@ -1,6 +1,7 @@
 package br.com.truvainfo.zoolyapi.service;
 
 import br.com.truvainfo.zoolyapi.domain.User;
+import br.com.truvainfo.zoolyapi.domain.dto.UserChangeDTO;
 import br.com.truvainfo.zoolyapi.domain.dto.UserDTO;
 import br.com.truvainfo.zoolyapi.domain.mapper.UserMapper;
 import br.com.truvainfo.zoolyapi.repository.UserRepository;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static br.com.truvainfo.zoolyapi.security.MyUserDetailsService.MSG_ERROR_AUTHENTICATION_01;
-import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
+import static br.com.truvainfo.zoolyapi.util.GeneralUtil.*;
 import static java.util.Objects.isNull;
 
 @Service
@@ -42,22 +43,43 @@ public class UserService {
 	}
 	
 	public void saveUser(final UserDTO userDto) {
-		
+		final String hashUser = generateHash();
 		final User user = userMapper.toEntity(userDto);
 		
 		user.setUserRole(userRoleRepository.findByDescription(userDto.getUserRole().getDescription())
 		                               .orElseThrow(() -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ROLE))));
+
 		
 		if (isNull(user.getCreationDate())) {
 			user.setCreationDate(new Date());
 		}
+
+		user.setHash(hashUser);
 		
 		userRepository.save(user);
 	}
-	
+
+	private String generateHash() {
+		return getMd5(getRandomWord());
+	}
+
 	public void deleteUser(final Integer userId) {
 		userRepository.delete(userRepository.findById(userId)
 		                                    .orElseThrow(
 				                                    () -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ID) + userId)));
 	}
+
+	private User verifyHashAndUser(String username, String hashUser) throws Exception {
+		return userRepository.findByEmailAndHash(username, hashUser)
+				.orElseThrow(() -> new Exception(getMessage("msg.error.authentication.02")));
+	}
+
+	public boolean changePassword(UserChangeDTO userChangeDTO) throws Exception {
+		User user = verifyHashAndUser(userChangeDTO.getEmail(), userChangeDTO.getHash());
+		user.setPassword(userChangeDTO.getPassword());
+		user.setHash(generateHash());
+		userRepository.saveAndFlush(user);
+		return Boolean.TRUE;
+	}
+
 }
