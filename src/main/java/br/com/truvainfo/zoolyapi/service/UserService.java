@@ -46,7 +46,7 @@ public class UserService {
 		final String hashUser = generateHash();
 		final User user = userMapper.toEntity(userDto);
 		
-		user.setUserRole(userRoleRepository.findByDescription(userDto.getUserRole().getDescription())
+		user.setUserRole(userRoleRepository.findById(userDto.getUserRole().getId())
 		                               .orElseThrow(() -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ROLE))));
 
 		
