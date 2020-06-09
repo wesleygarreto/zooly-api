@@ -10,9 +10,4 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserRoleMapper extends AbstractMapper<UserRole, UserRoleDTO> {
 
-	@Mapping(target = "userRole")
-	UserRole toEntity(UserDTO dto);
-
-	@Mapping(target = "userRole")
-	UserRoleDTO toDto(User entity);
 }

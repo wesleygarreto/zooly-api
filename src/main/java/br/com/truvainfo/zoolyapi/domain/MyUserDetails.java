@@ -19,8 +19,8 @@ public class MyUserDetails implements UserDetails {
 		this.email = user.getEmail();
 		this.password = user.getPassword();
 		this.active = user.isActive();
-		this.user = new User(user.getId(), user.getName(), user.getEmail(), user.getRole(), user.isActive(), user.getCreationDate());
-		this.role = new SimpleGrantedAuthority(user.getRole().getDescription());
+		this.user = new User(user.getId(), user.getName(), user.getEmail(), user.getUserRole(), user.isActive(), user.getCreationDate());
+		this.role = new SimpleGrantedAuthority(user.getUserRole().getDescription());
 	}
 	
 	@Override
