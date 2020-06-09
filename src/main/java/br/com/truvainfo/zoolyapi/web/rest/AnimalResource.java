@@ -1,6 +1,6 @@
 package br.com.truvainfo.zoolyapi.web.rest;
 
-import br.com.truvainfo.zoolyapi.domain.dto.AnimalDto;
+import br.com.truvainfo.zoolyapi.domain.dto.AnimalDTO;
 import br.com.truvainfo.zoolyapi.service.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,26 +18,26 @@ public class AnimalResource {
 	private final AnimalService animalService;
 	
 	@GetMapping(produces = "application/json")
-	public ResponseEntity<List<AnimalDto>> findAllAnimals() {
+	public ResponseEntity<List<AnimalDTO>> findAllAnimals() {
 		return ResponseEntity.ok(animalService.findAnimals());
 	}
 	
 	@PostMapping(consumes = "application/json")
-	public ResponseEntity<AnimalDto> saveAnimal(@RequestBody final AnimalDto animalDto) {
+	public ResponseEntity<AnimalDTO> saveAnimal(@RequestBody final AnimalDTO animalDto) {
 		
 		animalService.saveAnimal(animalDto);
 		return ResponseEntity.status(CREATED).build();
 	}
 	
 	@PutMapping(consumes = "application/json")
-	public ResponseEntity<AnimalDto> updateAnimal(@RequestBody final AnimalDto animalDto) {
+	public ResponseEntity<AnimalDTO> updateAnimal(@RequestBody final AnimalDTO animalDto) {
 		
 		animalService.saveAnimal(animalDto);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
 	@DeleteMapping("/{animalId}")
-	public ResponseEntity<AnimalDto> deleteAnimal(@PathVariable final Integer animalId) {
+	public ResponseEntity<AnimalDTO> deleteAnimal(@PathVariable final Integer animalId) {
 		
 		animalService.deleteAnimal(animalId);
 		return ResponseEntity.status(NO_CONTENT).build();

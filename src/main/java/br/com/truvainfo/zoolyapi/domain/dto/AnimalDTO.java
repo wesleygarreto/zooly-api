@@ -6,28 +6,29 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonFormat.Shape.*;
 
 @Getter
 @Setter
-public class BiometryDto implements Serializable {
+public class AnimalDTO implements Serializable {
 	
 	private Integer id;
 	
-	private Integer animalId;
+	private String popularName;
 	
-	private Integer userId;
+	private String nickname;
 	
-	private String weight;
-	
-	private String length;
-	
-	private String height;
+	private String scientificName;
 	
 	private String note;
 	
 	@JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date creationDate;
+	
+	private List<TaskDTO> tasks;
+	
+	private List<BiometryDTO> biometrics;
 	
 }

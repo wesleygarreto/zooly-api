@@ -1,7 +1,7 @@
 package br.com.truvainfo.zoolyapi.service;
 
 import br.com.truvainfo.zoolyapi.domain.Animal;
-import br.com.truvainfo.zoolyapi.domain.dto.AnimalDto;
+import br.com.truvainfo.zoolyapi.domain.dto.AnimalDTO;
 import br.com.truvainfo.zoolyapi.domain.mapper.AnimalMapper;
 import br.com.truvainfo.zoolyapi.repository.AnimalRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
 import static java.util.Objects.*;
 
 @Service
@@ -26,11 +27,11 @@ public class AnimalService {
 				() -> new IllegalArgumentException(MSG_ERROR_ANIMAL_ID + animalId));
 	}
 	
-	public List<AnimalDto> findAnimals() {
+	public List<AnimalDTO> findAnimals() {
 		return animalMapper.toDtoList(animalRepository.findAll());
 	}
 	
-	public void saveAnimal(final AnimalDto animalDto) {
+	public void saveAnimal(final AnimalDTO animalDto) {
 		
 		final Animal animal = animalMapper.toEntity(animalDto);
 		
@@ -44,7 +45,7 @@ public class AnimalService {
 	public void deleteAnimal(final Integer animalId) {
 		animalRepository.delete(animalRepository.findById(animalId)
 		                                        .orElseThrow(() -> new IllegalArgumentException(
-				                                        MSG_ERROR_ANIMAL_ID + animalId)));
+														getMessage(MSG_ERROR_ANIMAL_ID) + animalId)));
 	}
 	
 }

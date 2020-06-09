@@ -1,6 +1,6 @@
 package br.com.truvainfo.zoolyapi.web.rest;
 
-import br.com.truvainfo.zoolyapi.domain.dto.UserDto;
+import br.com.truvainfo.zoolyapi.domain.dto.UserDTO;
 import br.com.truvainfo.zoolyapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,19 +19,19 @@ public class UserResource {
 	private final UserService userService;
 
 	@GetMapping(produces = "application/json")
-	public ResponseEntity<List<UserDto>> findAllUsers() {
+	public ResponseEntity<List<UserDTO>> findAllUsers() {
 		return ResponseEntity.ok(userService.findUsers());
 	}
 	
 	@PostMapping(consumes = "application/json")
-	public ResponseEntity<UserDto> saveUser(@RequestBody final UserDto userDto) {
+	public ResponseEntity<UserDTO> saveUser(@RequestBody final UserDTO userDto) {
 		
 		userService.saveUser(userDto);
 		return ResponseEntity.status(CREATED).build();
 	}
 	
 	@PutMapping(consumes = "application/json")
-	public ResponseEntity<UserDto> updateUser(@RequestBody final UserDto userDto) {
+	public ResponseEntity<UserDTO> updateUser(@RequestBody final UserDTO userDto) {
 		
 		userService.saveUser(userDto);
 		return ResponseEntity.status(NO_CONTENT).build();
@@ -39,7 +39,7 @@ public class UserResource {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{userId}")
-	public ResponseEntity<UserDto> deleteUser(@PathVariable final Integer userId) {
+	public ResponseEntity<UserDTO> deleteUser(@PathVariable final Integer userId) {
 		
 		userService.deleteUser(userId);
 		return ResponseEntity.status(NO_CONTENT).build();

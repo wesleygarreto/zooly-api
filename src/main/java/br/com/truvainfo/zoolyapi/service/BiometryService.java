@@ -2,7 +2,7 @@ package br.com.truvainfo.zoolyapi.service;
 
 import br.com.truvainfo.zoolyapi.domain.Animal;
 import br.com.truvainfo.zoolyapi.domain.Biometry;
-import br.com.truvainfo.zoolyapi.domain.dto.BiometryDto;
+import br.com.truvainfo.zoolyapi.domain.dto.BiometryDTO;
 import br.com.truvainfo.zoolyapi.domain.mapper.BiometryMapper;
 import br.com.truvainfo.zoolyapi.repository.BiometryRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
 import static java.util.Objects.*;
 
 @Service
@@ -34,11 +35,11 @@ public class BiometryService {
 	private final ReportService reportService;
 	private final AnimalService animalService;
 	
-	public List<BiometryDto> findAnimalBiometrics(final Integer animalId) {
+	public List<BiometryDTO> findAnimalBiometrics(final Integer animalId) {
 		return biometryMapper.toDtoList(biometryRepository.findBiometricsByAnimalId(animalId));
 	}
 	
-	public void saveBiometry(final BiometryDto biometryDto) {
+	public void saveBiometry(final BiometryDTO biometryDto) {
 		
 		final Biometry biometry = biometryMapper.toEntity(biometryDto);
 		
@@ -52,7 +53,7 @@ public class BiometryService {
 	public void deleteBiometry(final Integer biometryId) {
 		biometryRepository.delete(biometryRepository.findById(biometryId)
 		                                            .orElseThrow(() -> new IllegalArgumentException(
-				                                            MSG_ERROR_BIOMETRY_ID + biometryId)));
+															getMessage(MSG_ERROR_BIOMETRY_ID) + biometryId)));
 	}
 	
 	public void generatePdfReport(final Integer animalId, final HttpServletResponse response) {

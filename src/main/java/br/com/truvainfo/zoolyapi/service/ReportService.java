@@ -14,13 +14,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Map;
 
+import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
 import static java.util.Objects.*;
 
 @Service
 public class ReportService {
 	
-	@Value("${msg.error.generate.report}")
-	private static String MSG_ERROR_GENERATE_REPORT;
+	private static String MSG_ERROR_GENERATE_REPORT = "msg.error.generate.report";
 	
 	@Value("${spring.datasource.driver-class-name}")
 	private String CONNECTION_DRIVER;
@@ -59,7 +59,7 @@ public class ReportService {
 			
 		} catch (Exception ex) {
 			
-			throw new RuntimeException(MSG_ERROR_GENERATE_REPORT + ex.getCause());
+			throw new RuntimeException(getMessage(MSG_ERROR_GENERATE_REPORT) + ex.getCause());
 		}
 	}
 	

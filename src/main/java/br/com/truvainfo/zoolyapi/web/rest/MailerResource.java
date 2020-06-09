@@ -1,18 +1,13 @@
 package br.com.truvainfo.zoolyapi.web.rest;
 
-import br.com.truvainfo.zoolyapi.domain.dto.AnimalDto;
-import br.com.truvainfo.zoolyapi.domain.dto.MessageEmailDTO;
-import br.com.truvainfo.zoolyapi.service.AnimalService;
+import br.com.truvainfo.zoolyapi.domain.dto.UserDTO;
 import br.com.truvainfo.zoolyapi.service.MailerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.NO_CONTENT;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/email")
@@ -21,11 +16,9 @@ public class MailerResource {
 	
 	private final MailerService mailerService;
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping(consumes = "application/json")
-	public ResponseEntity<MessageEmailDTO> sendEmail(@RequestBody MessageEmailDTO messageEmailDTO) {
-		mailerService.sendEmail(messageEmailDTO);
-		return ResponseEntity.status(NO_CONTENT).build();
+	@PostMapping("/password")
+	public ResponseEntity<Boolean> sendResetPasswdEmail(@RequestBody UserDTO userDTO) throws Exception {
+		return ResponseEntity.ok(mailerService.sendResetPasswdEmail(userDTO.getEmail()));
 	}
 
 }

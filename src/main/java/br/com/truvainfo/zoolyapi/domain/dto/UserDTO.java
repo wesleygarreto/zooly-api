@@ -12,21 +12,17 @@ import static com.fasterxml.jackson.annotation.JsonFormat.Shape.*;
 
 @Getter
 @Setter
-public class UserDto implements Serializable {
+public class UserDTO implements Serializable {
 	
 	private Integer id;
-	
 	private String name;
-	
 	private String email;
-	
 	private String note;
-	
-	private String role;
+	private UserRoleDTO userRole;
 	
 	@JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date creationDate;
 	
-	private List<TaskDto> tasks;
+	private List<TaskDTO> tasks;
 	
 }
