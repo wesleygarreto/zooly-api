@@ -3,7 +3,9 @@ package br.com.truvainfo.zoolyapi.service;
 import br.com.truvainfo.zoolyapi.domain.User;
 import br.com.truvainfo.zoolyapi.domain.dto.UserChangeDTO;
 import br.com.truvainfo.zoolyapi.domain.dto.UserDTO;
+import br.com.truvainfo.zoolyapi.domain.dto.UserWithPasswdDTO;
 import br.com.truvainfo.zoolyapi.domain.mapper.UserMapper;
+import br.com.truvainfo.zoolyapi.domain.mapper.UserWithPasswdMapper;
 import br.com.truvainfo.zoolyapi.repository.UserRepository;
 import br.com.truvainfo.zoolyapi.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,8 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final UserRoleRepository userRoleRepository;
 	private final UserMapper userMapper;
-	
+	private final UserWithPasswdMapper userWithPasswdMapper;
+
 	public List<UserDTO> findUsers() {
 		return userMapper.toDtoList(userRepository.findAll());
 	}
@@ -41,21 +44,36 @@ public class UserService {
 		                                      .orElseThrow(
 				                                      () -> new IllegalArgumentException(getMessage(MSG_ERROR_AUTHENTICATION_01))));
 	}
-	
-	public void saveUser(final UserDTO userDto) {
+
+	public void saveUser(final UserWithPasswdDTO userDto) {
 		final String hashUser = generateHash();
-		final User user = userMapper.toEntity(userDto);
-		
+		final User user = userWithPasswdMapper.toEntity(userDto);
+
 		user.setUserRole(userRoleRepository.findById(userDto.getUserRole().getId())
 		                               .orElseThrow(() -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ROLE))));
 
-		
+
 		if (isNull(user.getCreationDate())) {
 			user.setCreationDate(new Date());
 		}
 
 		user.setHash(hashUser);
-		
+		user.setActive(Boolean.TRUE);
+
+		userRepository.save(user);
+	}
+
+	public void updateUser(final UserWithPasswdDTO userDto) {
+		final User user = userRepository.findById(userDto.getId())
+				.orElseThrow(() -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ID)));
+
+		user.setUserRole(userRoleRepository.findById(userDto.getUserRole().getId())
+				.orElseThrow(() -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ROLE))));
+
+		user.setName(userDto.getName());
+		user.setPassword(userDto.getPassword());
+		user.setEmail(user.getEmail());
+
 		userRepository.save(user);
 	}
 

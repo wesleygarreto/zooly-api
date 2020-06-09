@@ -1,6 +1,7 @@
 package br.com.truvainfo.zoolyapi.web.rest;
 
 import br.com.truvainfo.zoolyapi.domain.dto.UserDTO;
+import br.com.truvainfo.zoolyapi.domain.dto.UserWithPasswdDTO;
 import br.com.truvainfo.zoolyapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +25,16 @@ public class UserResource {
 	}
 	
 	@PostMapping(consumes = "application/json")
-	public ResponseEntity<UserDTO> saveUser(@RequestBody final UserDTO userDto) {
+	public ResponseEntity<UserWithPasswdDTO> saveUser(@RequestBody final UserWithPasswdDTO userDto) {
 		
 		userService.saveUser(userDto);
 		return ResponseEntity.status(CREATED).build();
 	}
 	
 	@PutMapping(consumes = "application/json")
-	public ResponseEntity<UserDTO> updateUser(@RequestBody final UserDTO userDto) {
+	public ResponseEntity<UserWithPasswdDTO> updateUser(@RequestBody final UserWithPasswdDTO userDto) {
 		
-		userService.saveUser(userDto);
+		userService.updateUser(userDto);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 
