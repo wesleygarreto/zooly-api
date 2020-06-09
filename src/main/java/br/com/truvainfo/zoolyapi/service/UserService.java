@@ -44,7 +44,7 @@ public class UserService {
 		
 		final User user = userMapper.toEntity(userDto);
 		
-		user.setRole(userRoleRepository.findByDescription(userDto.getUserRole().getDescription())
+		user.setUserRole(userRoleRepository.findByDescription(userDto.getUserRole().getDescription())
 		                               .orElseThrow(() -> new IllegalArgumentException(MSG_ERROR_USER_ROLE)));
 		
 		if (isNull(user.getCreationDate())) {
