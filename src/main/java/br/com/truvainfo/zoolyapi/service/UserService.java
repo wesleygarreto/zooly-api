@@ -12,8 +12,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static br.com.truvainfo.zoolyapi.security.MyUserDetailsService.*;
-import static java.util.Objects.*;
+import static br.com.truvainfo.zoolyapi.security.MyUserDetailsService.MSG_ERROR_AUTHENTICATION_01;
+import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
+import static java.util.Objects.isNull;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +38,7 @@ public class UserService {
 	public UserDTO findUserByEmailPassword(final String email, final String password) {
 		return userMapper.toDto(userRepository.findByEmailAndPassword(email, password)
 		                                      .orElseThrow(
-				                                      () -> new IllegalArgumentException(MSG_ERROR_AUTHENTICATION_01)));
+				                                      () -> new IllegalArgumentException(getMessage(MSG_ERROR_AUTHENTICATION_01))));
 	}
 	
 	public void saveUser(final UserDTO userDto) {
@@ -45,7 +46,7 @@ public class UserService {
 		final User user = userMapper.toEntity(userDto);
 		
 		user.setUserRole(userRoleRepository.findByDescription(userDto.getUserRole().getDescription())
-		                               .orElseThrow(() -> new IllegalArgumentException(MSG_ERROR_USER_ROLE)));
+		                               .orElseThrow(() -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ROLE))));
 		
 		if (isNull(user.getCreationDate())) {
 			user.setCreationDate(new Date());
@@ -57,6 +58,6 @@ public class UserService {
 	public void deleteUser(final Integer userId) {
 		userRepository.delete(userRepository.findById(userId)
 		                                    .orElseThrow(
-				                                    () -> new IllegalArgumentException(MSG_ERROR_USER_ID + userId)));
+				                                    () -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ID) + userId)));
 	}
 }

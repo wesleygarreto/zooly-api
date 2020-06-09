@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
 import static java.util.Objects.*;
 
 @Service
@@ -52,7 +53,7 @@ public class BiometryService {
 	public void deleteBiometry(final Integer biometryId) {
 		biometryRepository.delete(biometryRepository.findById(biometryId)
 		                                            .orElseThrow(() -> new IllegalArgumentException(
-				                                            MSG_ERROR_BIOMETRY_ID + biometryId)));
+															getMessage(MSG_ERROR_BIOMETRY_ID) + biometryId)));
 	}
 	
 	public void generatePdfReport(final Integer animalId, final HttpServletResponse response) {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static br.com.truvainfo.zoolyapi.domain.enums.TaskStatus.*;
+import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
 import static java.util.Objects.*;
 
 @Service
@@ -44,7 +45,7 @@ public class TaskService {
 	public void deleteTask(final Integer taskId) {
 		taskRepository.delete(taskRepository.findById(taskId)
 		                                    .orElseThrow(
-				                                    () -> new IllegalArgumentException(MSG_ERROR_TASK_ID + taskId)));
+				                                    () -> new IllegalArgumentException(getMessage(MSG_ERROR_TASK_ID) + taskId)));
 	}
 	
 }
