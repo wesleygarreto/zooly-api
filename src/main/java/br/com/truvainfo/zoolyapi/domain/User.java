@@ -35,7 +35,7 @@ public class User implements Serializable {
 
 	@ManyToOne()
 	@JoinColumn(name = "CD_ROLE")
-	private UserRole role;
+	private UserRole userRole;
 
 	@Column(name = "ACTIVE")
 	private boolean active;
@@ -51,7 +51,7 @@ public class User implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.role = role;
+		this.userRole = role;
 		this.active = active;
 		this.creationDate = creationDate;
 	}

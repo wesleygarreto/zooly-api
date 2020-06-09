@@ -1,7 +1,7 @@
 package br.com.truvainfo.zoolyapi.service;
 
 import br.com.truvainfo.zoolyapi.domain.User;
-import br.com.truvainfo.zoolyapi.domain.dto.UserDto;
+import br.com.truvainfo.zoolyapi.domain.dto.UserDTO;
 import br.com.truvainfo.zoolyapi.domain.mapper.UserMapper;
 import br.com.truvainfo.zoolyapi.repository.UserRepository;
 import br.com.truvainfo.zoolyapi.repository.UserRoleRepository;
@@ -26,7 +26,7 @@ public class UserService {
 	private final UserRoleRepository userRoleRepository;
 	private final UserMapper userMapper;
 	
-	public List<UserDto> findUsers() {
+	public List<UserDTO> findUsers() {
 		return userMapper.toDtoList(userRepository.findAll());
 	}
 	
@@ -34,17 +34,17 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 	
-	public UserDto findUserByEmailPassword(final String email, final String password) {
+	public UserDTO findUserByEmailPassword(final String email, final String password) {
 		return userMapper.toDto(userRepository.findByEmailAndPassword(email, password)
 		                                      .orElseThrow(
 				                                      () -> new IllegalArgumentException(MSG_ERROR_AUTHENTICATION_01)));
 	}
 	
-	public void saveUser(final UserDto userDto) {
+	public void saveUser(final UserDTO userDto) {
 		
 		final User user = userMapper.toEntity(userDto);
 		
-		user.setRole(userRoleRepository.findByDescription(userDto.getRole())
+		user.setRole(userRoleRepository.findByDescription(userDto.getUserRole().getDescription())
 		                               .orElseThrow(() -> new IllegalArgumentException(MSG_ERROR_USER_ROLE)));
 		
 		if (isNull(user.getCreationDate())) {

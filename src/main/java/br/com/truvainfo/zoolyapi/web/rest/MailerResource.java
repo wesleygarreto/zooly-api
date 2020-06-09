@@ -1,17 +1,12 @@
 package br.com.truvainfo.zoolyapi.web.rest;
 
-import br.com.truvainfo.zoolyapi.domain.dto.AnimalDto;
 import br.com.truvainfo.zoolyapi.domain.dto.MessageEmailDTO;
-import br.com.truvainfo.zoolyapi.service.AnimalService;
 import br.com.truvainfo.zoolyapi.service.MailerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController

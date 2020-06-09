@@ -12,7 +12,7 @@ import static com.fasterxml.jackson.annotation.JsonFormat.Shape.*;
 
 @Getter
 @Setter
-public class TaskDto implements Serializable {
+public class TaskDTO implements Serializable {
 	
 	private Integer id;
 	

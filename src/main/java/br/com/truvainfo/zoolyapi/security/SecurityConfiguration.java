@@ -1,5 +1,6 @@
 package br.com.truvainfo.zoolyapi.security;
 
+import br.com.truvainfo.zoolyapi.filters.CorsFilter;
 import br.com.truvainfo.zoolyapi.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
@@ -31,7 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .addFilterBefore(corsFilter(), SessionManagementFilter.class)
+                .csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate", "/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources/**",
@@ -48,6 +52,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Bean
+    CorsFilter corsFilter() {
+        CorsFilter filter = new CorsFilter();
+        return filter;
     }
 
     @Bean

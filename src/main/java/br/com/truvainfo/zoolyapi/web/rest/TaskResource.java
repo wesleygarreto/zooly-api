@@ -1,6 +1,6 @@
 package br.com.truvainfo.zoolyapi.web.rest;
 
-import br.com.truvainfo.zoolyapi.domain.dto.TaskDto;
+import br.com.truvainfo.zoolyapi.domain.dto.TaskDTO;
 import br.com.truvainfo.zoolyapi.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,36 +18,36 @@ public class TaskResource {
 	private final TaskService taskService;
 	
 	@GetMapping(produces = "application/json")
-	public ResponseEntity<List<TaskDto>> findAllTasks() {
+	public ResponseEntity<List<TaskDTO>> findAllTasks() {
 		return ResponseEntity.ok(taskService.findAllTasks());
 	}
 	
 	@GetMapping(value = "/user/{userId}", produces = "application/json")
-	public ResponseEntity<List<TaskDto>> findUserTasks(@PathVariable final Integer userId) {
+	public ResponseEntity<List<TaskDTO>> findUserTasks(@PathVariable final Integer userId) {
 		return ResponseEntity.ok(taskService.findUserTasks(userId));
 	}
 	
 	@GetMapping(value = "/animal/{animalId}", produces = "application/json")
-	public ResponseEntity<List<TaskDto>> findAnimalTasks(@PathVariable final Integer animalId) {
+	public ResponseEntity<List<TaskDTO>> findAnimalTasks(@PathVariable final Integer animalId) {
 		return ResponseEntity.ok(taskService.findAnimalTasks(animalId));
 	}
 	
 	@PostMapping(consumes = "application/json")
-	public ResponseEntity<TaskDto> saveTask(@RequestBody final TaskDto taskDto) {
+	public ResponseEntity<TaskDTO> saveTask(@RequestBody final TaskDTO taskDto) {
 		
 		taskService.saveTask(taskDto);
 		return ResponseEntity.status(CREATED).build();
 	}
 	
 	@PutMapping(consumes = "application/json")
-	public ResponseEntity<TaskDto> updateTask(@RequestBody final TaskDto taskDto) {
+	public ResponseEntity<TaskDTO> updateTask(@RequestBody final TaskDTO taskDto) {
 		
 		taskService.saveTask(taskDto);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
 	@DeleteMapping("/{taskId}")
-	public ResponseEntity<TaskDto> deleteTask(@PathVariable final Integer taskId) {
+	public ResponseEntity<TaskDTO> deleteTask(@PathVariable final Integer taskId) {
 		
 		taskService.deleteTask(taskId);
 		return ResponseEntity.status(NO_CONTENT).build();
