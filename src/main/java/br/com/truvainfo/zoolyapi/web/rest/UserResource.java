@@ -37,7 +37,6 @@ public class UserResource {
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<UserDTO> deleteUser(@PathVariable final Integer userId) {
 		
