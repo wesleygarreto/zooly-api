@@ -39,12 +39,10 @@ public class Animal implements Serializable {
 	@Column(name = "CREATION_DATE")
 	private Date creationDate;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "animal")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToMany(orphanRemoval = true, mappedBy = "animal")
 	private List<Task> tasks;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "animal")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToMany(orphanRemoval = true, mappedBy = "animal")
 	private List<Biometry> biometrics;
 	
 }

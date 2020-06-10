@@ -46,8 +46,7 @@ public class User implements Serializable {
 	@Column(name = "CREATION_DATE")
 	private Date creationDate;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "responsibleUser")
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToMany(orphanRemoval = true, mappedBy = "responsibleUser")
 	private List<Task> tasks;
 
 	public User(Integer id, String name, String email, UserRole role, boolean active, Date creationDate) {
