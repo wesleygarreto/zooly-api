@@ -109,7 +109,7 @@ public class UserService {
 
 	public boolean changePassword(UserChangeDTO userChangeDTO) throws Exception {
 		User user = verifyHashAndUser(userChangeDTO.getEmail(), userChangeDTO.getHash());
-		user.setPassword(userChangeDTO.getPassword());
+		user.setPassword(bCryptPasswordEncoder.encode(userChangeDTO.getPassword()));
 		user.setHash(generateHash());
 		userRepository.saveAndFlush(user);
 		return Boolean.TRUE;
