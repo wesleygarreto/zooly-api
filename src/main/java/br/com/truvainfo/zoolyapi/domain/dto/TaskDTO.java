@@ -20,7 +20,6 @@ public class TaskDTO implements Serializable {
 	
 	private String description;
 	
-	@JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date date;
 	
 	@JsonFormat(shape = STRING)
