@@ -1,6 +1,8 @@
 package br.com.truvainfo.zoolyapi.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -44,7 +46,8 @@ public class User implements Serializable {
 	@Column(name = "CREATION_DATE")
 	private Date creationDate;
 	
-	@OneToMany(mappedBy = "responsibleUser")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "responsibleUser")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Task> tasks;
 
 	public User(Integer id, String name, String email, UserRole role, boolean active, Date creationDate) {
