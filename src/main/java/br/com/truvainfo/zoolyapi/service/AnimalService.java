@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+import static br.com.truvainfo.zoolyapi.service.LogService.ANIMAL_ICON;
 import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
 import static java.util.Objects.*;
 
@@ -21,6 +22,7 @@ public class AnimalService {
 	
 	private final AnimalRepository animalRepository;
 	private final AnimalMapper animalMapper;
+	private final LogService logService;
 	
 	public Animal findById(final Integer animalId) {
 		return animalRepository.findById(animalId).orElseThrow(
@@ -32,7 +34,6 @@ public class AnimalService {
 	}
 	
 	public void saveAnimal(final AnimalDTO animalDto) {
-		
 		final Animal animal = animalMapper.toEntity(animalDto);
 		
 		if (isNull(animal.getCreationDate())) {
@@ -40,12 +41,14 @@ public class AnimalService {
 		}
 		
 		animalRepository.save(animal);
+		logService.saveLog(logService.createLogDTO(ANIMAL_ICON, "inseriu um animal às"));
 	}
 	
 	public void deleteAnimal(final Integer animalId) {
 		animalRepository.delete(animalRepository.findById(animalId)
 		                                        .orElseThrow(() -> new IllegalArgumentException(
 														getMessage(MSG_ERROR_ANIMAL_ID) + animalId)));
+		logService.saveLog(logService.createLogDTO(ANIMAL_ICON, "removeu um animal às"));
 	}
 	
 }

@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static br.com.truvainfo.zoolyapi.service.LogService.BIOMETRY_ICON;
 import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getMessage;
 import static java.util.Objects.*;
 
@@ -34,12 +35,13 @@ public class BiometryService {
 	private final BiometryMapper biometryMapper;
 	private final ReportService reportService;
 	private final AnimalService animalService;
+	private final LogService logService;
 	
 	public List<BiometryDTO> findAnimalBiometrics(final Integer animalId) {
 		return biometryMapper.toDtoList(biometryRepository.findBiometricsByAnimalId(animalId));
 	}
 	
-	public void saveBiometry(final BiometryDTO biometryDto) {
+	public void saveBiometry(final BiometryDTO biometryDto, Boolean isUpdate) {
 		
 		final Biometry biometry = biometryMapper.toEntity(biometryDto);
 		
@@ -48,12 +50,18 @@ public class BiometryService {
 		}
 		
 		biometryRepository.save(biometry);
+
+		if (isUpdate)
+			logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "atualizou uma biometria às"));
+		else
+			logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "inseriu uma biometria às"));
 	}
 	
 	public void deleteBiometry(final Integer biometryId) {
 		biometryRepository.delete(biometryRepository.findById(biometryId)
 		                                            .orElseThrow(() -> new IllegalArgumentException(
 															getMessage(MSG_ERROR_BIOMETRY_ID) + biometryId)));
+		logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "removeu uma biometria às"));
 	}
 	
 	public void generatePdfReport(final Integer animalId, final HttpServletResponse response) {
@@ -65,6 +73,7 @@ public class BiometryService {
 		parameters.put("name_animal", animal.getNickname());
 		
 		reportService.exportToPdfStream(BIOMETRY_REPORT_FILEPATH, BIOMETRY_REPORT_FILENAME, parameters, response);
+		logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "gerou relatório às"));
 	}
 	
 }
