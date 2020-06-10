@@ -41,6 +41,10 @@ public class BiometryService {
 		return biometryMapper.toDtoList(biometryRepository.findBiometricsByAnimalId(animalId));
 	}
 	
+	public List<BiometryDTO> findAllBiometrics() {
+		return biometryMapper.toDtoList(biometryRepository.findAll());
+	}
+	
 	public void saveBiometry(final BiometryDTO biometryDto, Boolean isUpdate) {
 		
 		final Biometry biometry = biometryMapper.toEntity(biometryDto);
@@ -60,17 +64,24 @@ public class BiometryService {
 	public void deleteBiometry(final Integer biometryId) {
 		biometryRepository.delete(biometryRepository.findById(biometryId)
 		                                            .orElseThrow(() -> new IllegalArgumentException(
-															getMessage(MSG_ERROR_BIOMETRY_ID) + biometryId)));
+				                                            getMessage(MSG_ERROR_BIOMETRY_ID) + biometryId)));
 		logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "removeu uma biometria às"));
 	}
 	
-	public void generatePdfReport(final Integer animalId, final HttpServletResponse response) {
+	public void generatePdfReport(final Integer biometryId, final HttpServletResponse response) {
 		
-		final Animal animal = animalService.findById(animalId);
+		final Biometry biometry = biometryRepository.findById(biometryId).orElseThrow(
+				() -> new IllegalArgumentException(
+						getMessage(MSG_ERROR_BIOMETRY_ID) + biometryId));
+		
+		final Animal animal = biometry.getAnimal();
 		final Map<String, Object> parameters = new HashMap<>();
 		
-		parameters.put("cd_animal", animal.getId());
-		parameters.put("name_animal", animal.getNickname());
+		parameters.put("nickname", animal.getNickname());
+		parameters.put("popular_name", animal.getPopularName());
+		parameters.put("scientific_name", animal.getScientificName());
+		parameters.put("responsible", biometry.getUser().getName());
+		parameters.put("biometry_date", biometry.getCreationDate());
 		
 		reportService.exportToPdfStream(BIOMETRY_REPORT_FILEPATH, BIOMETRY_REPORT_FILENAME, parameters, response);
 		logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "gerou relatório às"));
