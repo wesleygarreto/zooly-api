@@ -1,15 +1,15 @@
 package br.com.truvainfo.zoolyapi.util;
 
+import br.com.truvainfo.zoolyapi.domain.MyUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static java.util.Objects.nonNull;
 
@@ -22,6 +22,17 @@ public class GeneralUtil {
 
     static {
         bundle = ResourceBundle.getBundle("messages", new Locale("pt", "BR"));
+    }
+
+    public static MyUserDetails getLoggedUser() {
+        final MyUserDetails myUserDetails = getNamesAuthentication();
+        return myUserDetails;
+    }
+
+    private static MyUserDetails getNamesAuthentication() {
+        Authentication authentication = Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication())
+                .orElseThrow(() -> new IllegalArgumentException(getMessage("MSG_INTERNAL_ERROR")));
+        return (MyUserDetails) authentication.getPrincipal();
     }
 
     public static String getMessage(final String message) {

@@ -46,12 +46,12 @@ public class UserService {
 	}
 
 	public void saveUser(final UserWithPasswdDTO userDto) {
+		verifyEmailAlreadyExists(userDto);
 		final String hashUser = generateHash();
 		final User user = userWithPasswdMapper.toEntity(userDto);
 
 		user.setUserRole(userRoleRepository.findById(userDto.getUserRole().getId())
 		                               .orElseThrow(() -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ROLE))));
-
 
 		if (isNull(user.getCreationDate())) {
 			user.setCreationDate(new Date());
@@ -61,6 +61,11 @@ public class UserService {
 		user.setActive(Boolean.TRUE);
 
 		userRepository.save(user);
+	}
+
+	private void verifyEmailAlreadyExists(UserWithPasswdDTO userDto) {
+		if (userRepository.countByEmail(userDto.getEmail()) > 0)
+			throw new IllegalArgumentException(getMessage("msg.error.user.email.exists"));
 	}
 
 	public void updateUser(final UserWithPasswdDTO userDto) {
