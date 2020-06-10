@@ -18,8 +18,8 @@ import static br.com.truvainfo.zoolyapi.util.GeneralUtil.getLoggedUser;
 @RequiredArgsConstructor
 public class LogService {
 
-    private LogRepository logRepository;
-    private LogMapper logMapper;
+    private final LogRepository logRepository;
+    private final LogMapper logMapper;
 
     public final static String TASK_ICON = "clipboard-text-outline";
     public final static String ANIMAL_ICON = "paw";
