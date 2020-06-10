@@ -26,7 +26,6 @@ public class UserResource {
 	}
 	
 	@PostMapping(consumes = "application/json")
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ResponseEntity<UserWithPasswdDTO> saveUser(@RequestBody final UserWithPasswdDTO userDto) {
 		
 		userService.saveUser(userDto);
