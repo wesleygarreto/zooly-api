@@ -1,6 +1,8 @@
 package br.com.truvainfo.zoolyapi.domain;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,10 +39,12 @@ public class Animal implements Serializable {
 	@Column(name = "CREATION_DATE")
 	private Date creationDate;
 	
-	@OneToMany(mappedBy = "animal")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "animal")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Task> tasks;
 	
-	@OneToMany(mappedBy = "animal")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "animal")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Biometry> biometrics;
 	
 }
