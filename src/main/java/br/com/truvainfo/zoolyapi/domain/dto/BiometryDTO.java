@@ -17,7 +17,11 @@ public class BiometryDTO implements Serializable {
 	
 	private Integer animalId;
 	
+	private String animalName;
+	
 	private Integer userId;
+	
+	private String userName;
 	
 	private String weight;
 	

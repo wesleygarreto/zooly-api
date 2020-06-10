@@ -37,6 +37,12 @@ public class BiometryService {
 	private final AnimalService animalService;
 	private final LogService logService;
 	
+	public BiometryDTO findBiometryById(final Integer biometryId) {
+		return biometryMapper.toDto(
+				biometryRepository.findById(biometryId).orElseThrow(() -> new IllegalArgumentException(
+						getMessage(MSG_ERROR_BIOMETRY_ID) + biometryId)));
+	}
+	
 	public List<BiometryDTO> findAnimalBiometrics(final Integer animalId) {
 		return biometryMapper.toDtoList(biometryRepository.findBiometricsByAnimalId(animalId));
 	}
@@ -54,11 +60,12 @@ public class BiometryService {
 		}
 		
 		biometryRepository.save(biometry);
-
-		if (isUpdate)
+		
+		if (isUpdate) {
 			logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "atualizou uma biometria às"));
-		else
+		} else {
 			logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "inseriu uma biometria às"));
+		}
 	}
 	
 	public void deleteBiometry(final Integer biometryId) {
@@ -83,7 +90,7 @@ public class BiometryService {
 		parameters.put("responsible", biometry.getUser().getName());
 		parameters.put("biometry_date", biometry.getCreationDate().toString());
 		parameters.put("note", biometry.getNote());
-		parameters.put("prescription", "");
+		parameters.put("prescription", biometry.getPrescription());
 		parameters.put("weight", biometry.getWeight());
 		parameters.put("height", biometry.getHeight());
 		parameters.put("length", biometry.getLength());
