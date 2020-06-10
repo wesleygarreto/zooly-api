@@ -9,6 +9,8 @@ import br.com.truvainfo.zoolyapi.domain.mapper.UserWithPasswdMapper;
 import br.com.truvainfo.zoolyapi.repository.UserRepository;
 import br.com.truvainfo.zoolyapi.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,6 +35,7 @@ public class UserService {
 	private final UserMapper userMapper;
 	private final UserWithPasswdMapper userWithPasswdMapper;
 	private final LogService logService;
+	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
 	public List<UserDTO> findUsers() {
 		return userMapper.toDtoList(userRepository.findAll());
@@ -60,6 +63,7 @@ public class UserService {
 			user.setCreationDate(new Date());
 		}
 
+		user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		user.setHash(hashUser);
 		user.setActive(Boolean.TRUE);
 
@@ -80,7 +84,7 @@ public class UserService {
 				.orElseThrow(() -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ROLE))));
 
 		user.setName(userDto.getName());
-		user.setPassword(userDto.getPassword());
+		user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		user.setEmail(user.getEmail());
 
 		userRepository.save(user);
