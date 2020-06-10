@@ -81,7 +81,12 @@ public class BiometryService {
 		parameters.put("popular_name", animal.getPopularName());
 		parameters.put("scientific_name", animal.getScientificName());
 		parameters.put("responsible", biometry.getUser().getName());
-		parameters.put("biometry_date", biometry.getCreationDate());
+		parameters.put("biometry_date", biometry.getCreationDate().toString());
+		parameters.put("note", biometry.getNote());
+		parameters.put("prescription", "");
+		parameters.put("weight", biometry.getWeight());
+		parameters.put("height", biometry.getHeight());
+		parameters.put("length", biometry.getLength());
 		
 		reportService.exportToPdfStream(BIOMETRY_REPORT_FILEPATH, BIOMETRY_REPORT_FILENAME, parameters, response);
 		logService.saveLog(logService.createLogDTO(BIOMETRY_ICON, "gerou relatório às"));
