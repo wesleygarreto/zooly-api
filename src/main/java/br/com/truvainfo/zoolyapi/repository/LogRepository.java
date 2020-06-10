@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface LogRepository extends JpaRepository<Log, Integer> {
 	
-	List<Log> findAllByUserId(final Integer userId);
+	List<Log> findAllByUserIdOrderByCreationDateDesc(final Integer userId);
+
+	List<Log> findAllByOrderByCreationDateDesc();
 
 }
