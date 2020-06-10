@@ -29,4 +29,6 @@ public class TaskDTO implements Serializable {
 	
 	private Integer responsibleUserId;
 	
+	private String responsibleUserName;
+	
 }

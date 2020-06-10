@@ -19,6 +19,11 @@ public class BiometryResource {
 	
 	private final BiometryService biometryService;
 	
+	@GetMapping(produces = "application/json")
+	public ResponseEntity<List<BiometryDTO>> findAllBiometrics() {
+		return ResponseEntity.ok(biometryService.findAllBiometrics());
+	}
+	
 	@GetMapping(value = "/{animalId}", produces = "application/json")
 	public ResponseEntity<List<BiometryDTO>> findAnimalBiometrics(@PathVariable final Integer animalId) {
 		return ResponseEntity.ok(biometryService.findAnimalBiometrics(animalId));
@@ -46,8 +51,8 @@ public class BiometryResource {
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
-	@GetMapping("/report/{animalId}")
-	public void generatePdfReport(@PathVariable final Integer animalId, final HttpServletResponse response) {
-		biometryService.generatePdfReport(animalId, response);
+	@GetMapping("/report/{biometryId}")
+	public void generatePdfReport(@PathVariable final Integer biometryId, final HttpServletResponse response) {
+		biometryService.generatePdfReport(biometryId, response);
 	}
 }
