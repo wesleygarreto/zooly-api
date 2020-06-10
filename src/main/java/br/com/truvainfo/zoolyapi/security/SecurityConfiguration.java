@@ -36,7 +36,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .addFilterBefore(corsFilter(), SessionManagementFilter.class)
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate", "/email/password", "/v2/api-docs",
+                .authorizeRequests().antMatchers("/authenticate", "/authenticate/change/pwd",
+                "/email/password",
+                "/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources/**",
                 "/configuration/security",
