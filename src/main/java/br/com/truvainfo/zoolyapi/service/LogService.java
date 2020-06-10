@@ -27,11 +27,11 @@ public class LogService {
     public final static String USER_ICON = "account-supervisor";
 
     public List<LogDTO> findAllLogs() {
-        return logMapper.toDtoList(logRepository.findAll());
+        return logMapper.toDtoList(logRepository.findAllByOrderByCreationDateDesc());
     }
 
     public List<LogDTO> findLogsByUser(Integer userId) {
-        return logMapper.toDtoList(logRepository.findAllByUserId(userId));
+        return logMapper.toDtoList(logRepository.findAllByUserIdOrderByCreationDateDesc(userId));
     }
 
     public Log saveLog(LogDTO logDTO) {
