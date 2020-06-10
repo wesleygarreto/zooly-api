@@ -45,7 +45,7 @@ public class ReportService {
 			final InputStream reportStream = this.getClass().getResourceAsStream(filePath);
 			final JasperDesign jasperDesign = JRXmlLoader.load(reportStream);
 			final JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-			final JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, buildConnection());
+			final JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());
 			
 			response.setContentType(MIME_TYPE);
 			response.setHeader("content-disposition", "attachment; filename=" + fileName);
@@ -62,11 +62,4 @@ public class ReportService {
 			throw new RuntimeException(getMessage(MSG_ERROR_GENERATE_REPORT) + ex.getCause());
 		}
 	}
-	
-	private Connection buildConnection() throws ClassNotFoundException, SQLException {
-		
-		Class.forName(CONNECTION_DRIVER);
-		return DriverManager.getConnection(CONNECTION_URL, CONNECTION_USER, CONNECTION_PASSWORD);
-	}
-	
 }
