@@ -5,12 +5,12 @@ import br.com.truvainfo.zoolyapi.domain.dto.UserWithPasswdDTO;
 import br.com.truvainfo.zoolyapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequestMapping("/users")
@@ -44,4 +44,5 @@ public class UserResource {
 		userService.deleteUser(userId);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
+
 }
