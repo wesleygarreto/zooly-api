@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.truvainfo</groupId>
 	<artifactId>zooly-api</artifactId>
-	<version>1.0.25</version>
+	<version>1.0.26</version>
 	<name>zooly-api</name>
 	<description>API for zooly project</description>
 
