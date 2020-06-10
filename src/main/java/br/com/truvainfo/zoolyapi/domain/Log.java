@@ -21,8 +21,11 @@ public class Log implements Serializable {
 	@Column(name = "CD_LOG")
 	private Integer id;
 	
+	@Column(name = "ICON")
+	private String icon;
+	
 	@Column(name = "DESCRIPTION")
-	private String description;
+	private String message;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CD_USER")
