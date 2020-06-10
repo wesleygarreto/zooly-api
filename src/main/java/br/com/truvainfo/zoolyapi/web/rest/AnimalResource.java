@@ -4,6 +4,7 @@ import br.com.truvainfo.zoolyapi.domain.dto.AnimalDTO;
 import br.com.truvainfo.zoolyapi.service.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class AnimalResource {
 	}
 	
 	@DeleteMapping("/{animalId}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ResponseEntity<AnimalDTO> deleteAnimal(@PathVariable final Integer animalId) {
 		animalService.deleteAnimal(animalId);
 		return ResponseEntity.status(NO_CONTENT).build();

@@ -4,6 +4,7 @@ import br.com.truvainfo.zoolyapi.domain.dto.BiometryDTO;
 import br.com.truvainfo.zoolyapi.service.BiometryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,7 @@ public class BiometryResource {
 	}
 	
 	@DeleteMapping("/{biometryId}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ResponseEntity<BiometryDTO> deleteBiometry(@PathVariable final Integer biometryId) {
 		
 		biometryService.deleteBiometry(biometryId);

@@ -4,6 +4,7 @@ import br.com.truvainfo.zoolyapi.domain.dto.TaskDTO;
 import br.com.truvainfo.zoolyapi.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class TaskResource {
 	private final TaskService taskService;
 	
 	@GetMapping(produces = "application/json")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ResponseEntity<List<TaskDTO>> findAllTasks() {
 		return ResponseEntity.ok(taskService.findAllTasks());
 	}
@@ -33,22 +35,22 @@ public class TaskResource {
 	}
 	
 	@PostMapping(consumes = "application/json")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_DOCTOR')")
 	public ResponseEntity<TaskDTO> saveTask(@RequestBody final TaskDTO taskDto) {
-		
 		taskService.saveTask(taskDto, Boolean.FALSE);
 		return ResponseEntity.status(CREATED).build();
 	}
 	
 	@PutMapping(consumes = "application/json")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_DOCTOR')")
 	public ResponseEntity<TaskDTO> updateTask(@RequestBody final TaskDTO taskDto) {
-		
 		taskService.saveTask(taskDto, Boolean.TRUE);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
 	@DeleteMapping("/{taskId}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
 	public ResponseEntity<TaskDTO> deleteTask(@PathVariable final Integer taskId) {
-		
 		taskService.deleteTask(taskId);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
