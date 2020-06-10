@@ -39,7 +39,10 @@ public class Biometry implements Serializable {
 	
 	@Column(name = "NOTE")
 	private String note;
-	
+
+	@Column(name = "PRESCRIPTION")
+	private String prescription;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATION_DATE")
 	private Date creationDate;

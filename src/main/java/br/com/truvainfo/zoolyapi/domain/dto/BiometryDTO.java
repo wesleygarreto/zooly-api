@@ -26,7 +26,9 @@ public class BiometryDTO implements Serializable {
 	private String height;
 	
 	private String note;
-	
+
+	private String prescription;
+
 	@JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date creationDate;
 	
