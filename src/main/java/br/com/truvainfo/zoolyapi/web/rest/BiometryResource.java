@@ -26,14 +26,14 @@ public class BiometryResource {
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<BiometryDTO> saveBiometry(@RequestBody final BiometryDTO biometryDto) {
 		
-		biometryService.saveBiometry(biometryDto);
+		biometryService.saveBiometry(biometryDto, Boolean.FALSE);
 		return ResponseEntity.status(CREATED).build();
 	}
 	
 	@PutMapping(consumes = "application/json")
 	public ResponseEntity<BiometryDTO> updateBiometry(@RequestBody final BiometryDTO biometryDto) {
 		
-		biometryService.saveBiometry(biometryDto);
+		biometryService.saveBiometry(biometryDto, Boolean.TRUE);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	

@@ -1,6 +1,7 @@
 package br.com.truvainfo.zoolyapi.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 
 @Getter
 @Setter
+@Builder
 public class LogDTO implements Serializable {
 	
 	private Integer id;

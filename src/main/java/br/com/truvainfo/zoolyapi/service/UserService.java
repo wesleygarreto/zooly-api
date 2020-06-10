@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static br.com.truvainfo.zoolyapi.security.MyUserDetailsService.MSG_ERROR_AUTHENTICATION_01;
+import static br.com.truvainfo.zoolyapi.service.LogService.TASK_ICON;
+import static br.com.truvainfo.zoolyapi.service.LogService.USER_ICON;
 import static br.com.truvainfo.zoolyapi.util.GeneralUtil.*;
 import static java.util.Objects.isNull;
 
@@ -30,6 +32,7 @@ public class UserService {
 	private final UserRoleRepository userRoleRepository;
 	private final UserMapper userMapper;
 	private final UserWithPasswdMapper userWithPasswdMapper;
+	private final LogService logService;
 
 	public List<UserDTO> findUsers() {
 		return userMapper.toDtoList(userRepository.findAll());
@@ -61,6 +64,7 @@ public class UserService {
 		user.setActive(Boolean.TRUE);
 
 		userRepository.save(user);
+		logService.saveLog(logService.createLogDTO(USER_ICON, "inseriu um usuário às"));
 	}
 
 	private void verifyEmailAlreadyExists(UserWithPasswdDTO userDto) {
@@ -80,6 +84,7 @@ public class UserService {
 		user.setEmail(user.getEmail());
 
 		userRepository.save(user);
+		logService.saveLog(logService.createLogDTO(USER_ICON, "atualizou um usuário às"));
 	}
 
 	private String generateHash() {
@@ -90,6 +95,7 @@ public class UserService {
 		userRepository.delete(userRepository.findById(userId)
 		                                    .orElseThrow(
 				                                    () -> new IllegalArgumentException(getMessage(MSG_ERROR_USER_ID) + userId)));
+		logService.saveLog(logService.createLogDTO(USER_ICON, "removeu um usuário às"));
 	}
 
 	private User verifyHashAndUser(String username, String hashUser) throws Exception {

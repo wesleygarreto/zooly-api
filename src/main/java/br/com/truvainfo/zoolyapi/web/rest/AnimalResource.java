@@ -24,21 +24,18 @@ public class AnimalResource {
 	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<AnimalDTO> saveAnimal(@RequestBody final AnimalDTO animalDto) {
-		
 		animalService.saveAnimal(animalDto);
 		return ResponseEntity.status(CREATED).build();
 	}
 	
 	@PutMapping(consumes = "application/json")
 	public ResponseEntity<AnimalDTO> updateAnimal(@RequestBody final AnimalDTO animalDto) {
-		
 		animalService.saveAnimal(animalDto);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
 	@DeleteMapping("/{animalId}")
 	public ResponseEntity<AnimalDTO> deleteAnimal(@PathVariable final Integer animalId) {
-		
 		animalService.deleteAnimal(animalId);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}

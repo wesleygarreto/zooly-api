@@ -35,14 +35,14 @@ public class TaskResource {
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<TaskDTO> saveTask(@RequestBody final TaskDTO taskDto) {
 		
-		taskService.saveTask(taskDto);
+		taskService.saveTask(taskDto, Boolean.FALSE);
 		return ResponseEntity.status(CREATED).build();
 	}
 	
 	@PutMapping(consumes = "application/json")
 	public ResponseEntity<TaskDTO> updateTask(@RequestBody final TaskDTO taskDto) {
 		
-		taskService.saveTask(taskDto);
+		taskService.saveTask(taskDto, Boolean.TRUE);
 		return ResponseEntity.status(NO_CONTENT).build();
 	}
 	
