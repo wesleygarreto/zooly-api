@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 public interface TaskMapper extends AbstractMapper<Task, TaskDTO> {
 	
 	@Mapping(source = "responsibleUserId", target = "responsibleUser.id")
+	@Mapping(source = "responsibleUserName", target = "responsibleUser.name")
 	@Mapping(source = "animalId", target = "animal.id")
 	Task toEntity(TaskDTO dto);
 }
