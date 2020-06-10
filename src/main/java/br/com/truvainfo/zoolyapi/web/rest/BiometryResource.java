@@ -24,6 +24,11 @@ public class BiometryResource {
 		return ResponseEntity.ok(biometryService.findAllBiometrics());
 	}
 	
+	@GetMapping(value = "/biometry/{biometryId}", produces = "application/json")
+	public ResponseEntity<BiometryDTO> findBiometryById(@PathVariable final Integer biometryId) {
+		return ResponseEntity.ok(biometryService.findBiometryById(biometryId));
+	}
+	
 	@GetMapping(value = "/{animalId}", produces = "application/json")
 	public ResponseEntity<List<BiometryDTO>> findAnimalBiometrics(@PathVariable final Integer animalId) {
 		return ResponseEntity.ok(biometryService.findAnimalBiometrics(animalId));
