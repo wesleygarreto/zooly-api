@@ -41,7 +41,7 @@ public class MailerService {
 
     public boolean sendResetPasswdEmail(String email) throws Exception {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new Exception(getMessage("msg.error.user.id")));
-        String url = "https://zooly-web.netlify.app/" + email + "/" + user.getHash();
+        String url = "https://zooly-web.netlify.app//auth/confirm-password/?u=" + email + "&h=" + user.getHash();
         String emailHtml = getTemplateEmail();
         emailHtml = emailHtml.replace("#{username}", user.getName());
         emailHtml = emailHtml.replace("#{userUrl}", url);
