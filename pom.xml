@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<postgres.version>42.2.12</postgres.version>
+		<postgres.version>42.3.3</postgres.version>
 		<lombok.version>1.18.12</lombok.version>
 		<mapstruct.version>1.3.0.Final</mapstruct.version>
 		<maven-compile-plugin.version>3.7.0</maven-compile-plugin.version>
