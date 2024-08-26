@@ -20,7 +20,7 @@
 		<lombok.version>1.18.12</lombok.version>
 		<mapstruct.version>1.3.0.Final</mapstruct.version>
 		<maven-compile-plugin.version>3.7.0</maven-compile-plugin.version>
-		<swagger.version>2.9.2</swagger.version>
+		<swagger.version>2.10.0</swagger.version>
 		<heroku.version>3.0.2</heroku.version>
 	</properties>
 
